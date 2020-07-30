@@ -39,7 +39,7 @@ Example for using the `runtimeArtifact` parameter:
 
 ### Using an existing installation
 
-Use the `installDirectory` parameter to specify the directory of an existing Liberty server installation. For example:
+Use the `installDirectory` parameter to specify the path of an existing Liberty server installation, including `wlp` in the path. For example:
 
 ```xml
 <plugin>

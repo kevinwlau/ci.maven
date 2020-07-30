@@ -1,5 +1,5 @@
 /**
- * (C) Copyright IBM Corporation 2014, 2019.
+ * (C) Copyright IBM Corporation 2014, 2020.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -175,7 +175,7 @@ public class BasicSupport extends AbstractLibertySupport {
         try {
             // First check if installDirectory is set, if it is, then we can skip this
             if (installDirectory != null) {
-                installDirectory = installDirectory.getCanonicalFile();
+                installDirectory = checkAndAppendWlp(installDirectory.getCanonicalFile());
 
                 // Quick sanity check
                 File file = new File(installDirectory, "lib/ws-launch.jar");
@@ -264,6 +264,15 @@ public class BasicSupport extends AbstractLibertySupport {
             }
         } catch (IOException e) {
             throw new MojoExecutionException(e.getMessage(), e);
+        }
+    }
+
+    protected File checkAndAppendWlp(File installDir) {
+        if (installDir.toPath().endsWith("wlp")) {
+            return installDir;
+        } else { // not valid wlp dir
+            log.warn(MessageFormat.format("The installDir {0} path does not reference a wlp folder. Using path {0}/wlp instead.", installDir));
+            return new File(installDir, "wlp");
         }
     }
 
