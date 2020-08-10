@@ -38,6 +38,7 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.maven.shared.utils.io.FileUtils;
+import org.apache.commons.io.output.CloseShieldOutputStream;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -109,8 +110,9 @@ public class BaseDevTest {
       assertTrue(process.isAlive());
 
       OutputStream stdin = process.getOutputStream();
+      CloseShieldOutputStream cstdin = new CloseShieldOutputStream(stdin);
 
-      writer = new BufferedWriter(new OutputStreamWriter(stdin));
+      writer = new BufferedWriter(new OutputStreamWriter(cstdin));
 
       // check that the server has started
       Thread.sleep(5000);
