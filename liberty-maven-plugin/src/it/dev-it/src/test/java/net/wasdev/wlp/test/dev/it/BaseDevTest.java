@@ -148,6 +148,7 @@ public class BaseDevTest {
       if (writer != null) {
          if(isDevMode) {
             writer.write("exit\n"); // trigger dev mode to shut down
+            writer.flush();
          }
          else {
             process.destroy(); // stop run
@@ -156,14 +157,14 @@ public class BaseDevTest {
          writer.close();
 
          try {
-            process.waitFor(120, TimeUnit.SECONDS);
+            process.waitFor(100, TimeUnit.SECONDS);
             process.exitValue();
          } catch (IllegalThreadStateException e) {
             throw e;
          }
 
          // test that dev mode has stopped running
-         assertTrue(verifyLogMessageExists("CWWKE0036I", 20000));
+         assertTrue(verifyLogMessageExists("CWWKE0036I", 100000));
       }
    }
 
