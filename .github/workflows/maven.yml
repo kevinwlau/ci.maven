@@ -53,5 +53,9 @@ jobs:
         cd ../ci.common
         mvn clean install
         cd ..
-    - name: Run tests with maven
+    - name: Run tests with maven (Windows)
+      if: matrix.os == 'windows-latest'
       run: mvn verify -Ponline-its -D"invoker.streamLogs"=true -Druntime=${{ matrix.RUNTIME }} -DruntimeVersion="${{ matrix.RUNTIME_VERSION }}"
+    - name: Run tests with maven (Ubuntu)
+      if: matrix.os == 'ubuntu-18.04'
+      run: mvn verify -Ponline-its -D"invoker.streamLogs"=true -Dinvoker.test=!dev-it -Druntime=${{ matrix.RUNTIME }} -DruntimeVersion="${{ matrix.RUNTIME_VERSION }}"
