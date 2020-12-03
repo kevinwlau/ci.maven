@@ -25,6 +25,8 @@ jobs:
           - RUNTIME_VERSION: 20.0.0.6
             java: 8
           - RUNTIME_VERSION: 20.0.0.9
+            java: 8
+          - RUNTIME_VERSION: 20.0.0.9
             java: 11
 
     steps:
