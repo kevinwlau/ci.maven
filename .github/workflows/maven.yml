@@ -21,12 +21,9 @@ jobs:
         os: [ubuntu-18.04, windows-latest]
         RUNTIME: [ ol, wlp ]
         RUNTIME_VERSION: [ 20.0.0.6, 20.0.0.9 ]
-        include:
-          - RUNTIME_VERSION: 20.0.0.6
-            java: 8
-          - RUNTIME_VERSION: 20.0.0.9
-            java: 8
-          - RUNTIME_VERSION: 20.0.0.9
+        java: [ 8, 11 ]
+        exclude:
+          - RUNTIME_VERSION: 20.0.0.6  # exclude java11 for older liberty version
             java: 11
 
     steps:
