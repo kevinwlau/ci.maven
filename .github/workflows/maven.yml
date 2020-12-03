@@ -25,6 +25,7 @@ jobs:
         exclude:
           - RUNTIME_VERSION: 20.0.0.6  # exclude java11 for older liberty version
             java: 11
+    name: ${{ matrix.RUNTIME }} ${{ matrix.RUNTIME_VERSION }}, ${{ matrix.java }}, ${{ matrix.os }}
 
     steps:
     - name: Setup Java ${{ matrix.java }}
